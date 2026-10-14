@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from '../redux/CartSlice';
+import { removeItem, updateQuantity, addItem } from '../redux/CartSlice';
 
 const CartItem = ({ onContinueShopping }) => {
   const cartItems = useSelector(state => state.cart.items);
@@ -8,7 +8,6 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate the total cost for a specific item (unit cost * quantity)
   const calculateTotalCost = (item) => {
-    // Extract numeric value from string like "$15"
     const unitCost = parseFloat(item.cost.substring(1));
     return unitCost * item.quantity;
   };
@@ -26,15 +25,15 @@ const CartItem = ({ onContinueShopping }) => {
     alert('Functionality to be added for future reference');
   };
 
+  // Updated to use addItem as per Task 4 instructions
   const handleIncrement = (item) => {
-    dispatch(updateQuantity({ name: item.name, amount: item.quantity + 1 }));
+    dispatch(addItem(item));
   };
 
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       dispatch(updateQuantity({ name: item.name, amount: item.quantity - 1 }));
     } else {
-      // If quantity is 1 and user clicks decrement, remove the item
       dispatch(removeItem(item.name));
     }
   };
