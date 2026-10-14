@@ -9,7 +9,6 @@ function App() {
   const [showProductList, setShowProductList] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
-  // Get total quantity of items in the cart for the navbar icon
   const totalQuantity = useSelector(state => state.cart.items.reduce((total, item) => total + item.quantity, 0));
 
   const handleGetStartedClick = () => {
@@ -68,13 +67,17 @@ function App() {
         </div>
       )}
 
-      <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
-        <ProductList onHomeClick={handleHomeClick} />
-      </div>
+      {showProductList && (
+        <div className="product-list-container">
+          <ProductList onHomeClick={handleHomeClick} />
+        </div>
+      )}
 
-      <div className={`cart-container ${showCart ? 'visible' : ''}`}>
-        <CartItem onContinueShopping={handleContinueShopping} />
-      </div>
+      {showCart && (
+        <div className="cart-container">
+          <CartItem onContinueShopping={handleContinueShopping} />
+        </div>
+      )}
     </div>
   );
 }
