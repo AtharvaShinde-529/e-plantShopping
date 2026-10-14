@@ -6,7 +6,6 @@ const ProductList = () => {
     const [addedToCart, setAddedToCart] = useState({});
     const dispatch = useDispatch();
 
-    // NOTE: Ensure your actual plants array is pasted here!
     const plantsArray = [
         {
             category: "Aromatic Plants",
